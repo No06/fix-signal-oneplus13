@@ -1,0 +1,10 @@
+# Some temporary-root sessions enable SELinux checks for unlabeled network
+# traffic. Restore networking for domains already granted network access.
+# Keep SELinux enforcing; restrict grants to the observed network labels.
+allow netdomain unlabeled packet { send recv }
+allow kernel unlabeled packet { send recv }
+allow { netdomain kernel } netif netif egress
+allow unlabeled netif netif ingress
+allow { netdomain kernel } node node sendto
+allow unlabeled node node recvfrom
+allow netdomain unlabeled peer recv

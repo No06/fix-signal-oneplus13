@@ -2,6 +2,20 @@
 
 MODDIR=${0%/*}
 
+# Android 16 uses Action for runtime recovery. Android 15 keeps the OTA flow.
+if [ "$(getprop ro.build.version.release)" = 16 ]; then
+    echo "Applying runtime radio recovery; see radio-recovery.log for details."
+    sh "$MODDIR/recover-radio.sh" --manual
+    RESULT=$?
+    tail -n 20 "$MODDIR/radio-recovery.log"
+    exit "$RESULT"
+fi
+
+if [ "$(getprop ro.boot.flash.locked)" != 0 ]; then
+    echo "Error: the Android 15 OTA dtbo patch requires an unlocked bootloader."
+    exit 1
+fi
+
 FILE="$MODDIR/dtbo.img"
 BOOT_PART="/dev/block/bootdevice/by-name/boot"
 DTBO_PART="/dev/block/bootdevice/by-name/dtbo"

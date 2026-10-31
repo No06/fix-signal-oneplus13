@@ -1,7 +1,6 @@
 id=fix-signal-oneplus13
-name=Fixes for OnePlus 13
-version=v4.1
-versionCode=401
+name=Fixes for OnePlus 13 (Temporary root)
+version=v4.2-temp-root
+versionCode=402
 author=Fly
-description=Fix signal for OnePlus 13 CN on OxygenOS 16. **To fix bootloop on OxygenOS 15, press "Action" below before you click the "Reboot" after finishing OTA System Update.**
-updateJson=https://raw.githubusercontent.com/K58/fix-signal-oneplus13/main/update.json
+description=OOS 16: NV mapping, enforcing SELinux network repair and guarded modem recovery after temporary root. Action retries recovery. OOS 15: Action retains the inactive-slot OTA dtbo patch.
